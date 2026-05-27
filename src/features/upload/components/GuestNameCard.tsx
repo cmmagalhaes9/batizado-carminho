@@ -20,11 +20,8 @@ function Greeted({ name, onClear }: { name: string; onClear: () => void }) {
   return (
     <div className={styles.greeted}>
       <div className={styles.greetedMsg}>
-        hi, <strong>{name}</strong> ✿
+        Olá, <strong>{name}</strong> ✿
       </div>
-      <button type="button" className={styles.change} onClick={onClear}>
-        not me
-      </button>
     </div>
   );
 }
@@ -36,33 +33,33 @@ function NameForm({ onSave }: { onSave: (name: string) => void }) {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!value.trim()) {
-      showToast('add your name first ✿');
+      showToast('adiciona o teu nome primeiro ✿');
       return;
     }
     onSave(value.trim());
-    showToast(`hi ${value.trim()} ♡`);
+    showToast(`olá ${value.trim()} ♡`);
   };
 
   return (
     <form className={`card ${styles.form}`} onSubmit={handleSubmit}>
       <h2 className="heading">
-        who are you? <span className="accent">✿</span>
+        qual o teu nome? <span className="accent">✿</span>
       </h2>
       <p className="lead" style={{ fontSize: 14, marginBottom: 14 }}>
-        so the family knows whose photos are whose
+        para a família saber de quem é cada foto
       </p>
       <div className={styles.row}>
         <input
           type="text"
           value={value}
           onChange={(e) => setValue(e.target.value)}
-          placeholder="your name"
+          placeholder="o teu nome"
           maxLength={30}
           autoFocus
-          aria-label="Your name"
+          aria-label="O teu nome"
         />
         <Button type="submit" variant="pink" className={styles.saveBtn}>
-          save
+          guardar
         </Button>
       </div>
     </form>

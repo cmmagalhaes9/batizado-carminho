@@ -1,17 +1,16 @@
 import { useEffect, useMemo } from 'react';
-import { Link, Navigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useEventMedia } from '@features/events/hooks/useEventMedia';
-import { getCurrentEvent } from '@features/events/services/eventRepository';
+import { GLOBAL_EVENT_ID, GLOBAL_EVENT_NAME } from '@features/events/services/globalEvent';
 import { useSlideshow } from '@features/slideshow/hooks/useSlideshow';
 import type { MediaItem } from '@/types/domain';
 import styles from './SlideshowPage.module.css';
 
 export function SlideshowPage() {
-  const event = getCurrentEvent();
-  // Slideshow polls less aggressively — 30s feels fine for a party.
-  const { media } = useEventMedia({ eventId: event?.id ?? null, pollIntervalMs: 30_000 });
+  // Slideshow polls less aggressively — 30s feels fine for uma festa.
+  const { media } = useEventMedia({ eventId: GLOBAL_EVENT_ID, pollIntervalMs: 30_000 });
 
-  // Slideshow plays oldest → newest so the most recent additions feel "fresh"
+  // Slideshow plays oldest → newest so the mais recentes parecem frescas.
   const orderedMedia = useMemo(() => [...media].reverse(), [media]);
 
   const { current, currentIndex, progress, paused, next, previous, togglePause } = useSlideshow({
@@ -36,8 +35,6 @@ export function SlideshowPage() {
     return () => window.removeEventListener('keydown', handler);
   }, [next, previous, togglePause]);
 
-  if (!event) return <Navigate to="/" replace />;
-
   if (orderedMedia.length === 0) {
     return (
       <div className={styles.centerMsg}>
@@ -57,10 +54,10 @@ export function SlideshowPage() {
             <path d="M21 15l-5-5L5 21" />
           </svg>
         </div>
-        <h1>waiting for memories…</h1>
-        <p>share the QR with your guests</p>
-        <Link to="/host" className={styles.backLink}>
-          ← back to dashboard
+        <h1>a esperar por memórias…</h1>
+        <p>pede aos convidados para enviarem as suas fotos</p>
+        <Link to="/" className={styles.backLink}>
+          ← voltar
         </Link>
       </div>
     );
@@ -75,7 +72,7 @@ export function SlideshowPage() {
       <div className={styles.titleBar}>
         <div className={styles.eventTitle}>
           <span className={styles.heart}>♡</span>
-          {event.name}
+          {GLOBAL_EVENT_NAME}
         </div>
         <div className={styles.counter}>
           {currentIndex + 1} / {orderedMedia.length}
@@ -96,25 +93,25 @@ export function SlideshowPage() {
 
       {current?.guestName && (
         <div className={styles.caption}>
-          <span className={styles.by}>by</span>
+          <span className={styles.by}>por</span>
           {current.guestName}
         </div>
       )}
 
       <div className={styles.controls}>
-        <button type="button" className={styles.ctrl} onClick={previous} aria-label="Previous">
+        <button type="button" className={styles.ctrl} onClick={previous} aria-label="Anterior">
           ‹
         </button>
-        <button type="button" className={styles.ctrl} onClick={togglePause} aria-label={paused ? 'Play' : 'Pause'}>
+        <button type="button" className={styles.ctrl} onClick={togglePause} aria-label={paused ? 'Reproduzir' : 'Pausar'}>
           {paused ? '▶' : '⏸'}
         </button>
-        <button type="button" className={styles.ctrl} onClick={next} aria-label="Next">
+        <button type="button" className={styles.ctrl} onClick={next} aria-label="Próximo">
           ›
         </button>
-        <button type="button" className={styles.ctrl} onClick={toggleFullscreen} aria-label="Fullscreen">
+        <button type="button" className={styles.ctrl} onClick={toggleFullscreen} aria-label="Tela cheia">
           ⛶
         </button>
-        <Link to="/host" className={styles.ctrl} aria-label="Back">
+        <Link to="/" className={styles.ctrl} aria-label="Voltar">
           ←
         </Link>
       </div>

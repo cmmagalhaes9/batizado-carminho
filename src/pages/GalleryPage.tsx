@@ -1,49 +1,44 @@
 import { useState } from 'react';
-import { Link, Navigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { AppHeader } from '@shared/components/AppHeader';
 import { useEventMedia } from '@features/events/hooks/useEventMedia';
-import { getCurrentEvent } from '@features/events/services/eventRepository';
+import { GLOBAL_EVENT_ID, GLOBAL_EVENT_NAME } from '@features/events/services/globalEvent';
 import { GalleryGrid } from '@features/gallery/components/GalleryGrid';
 import { Lightbox } from '@features/gallery/components/Lightbox';
 import styles from './GalleryPage.module.css';
 
 export function GalleryPage() {
-  const event = getCurrentEvent();
-  const { media, loading, error, refresh } = useEventMedia({ eventId: event?.id ?? null });
+  const { media, loading, error, refresh } = useEventMedia({ eventId: GLOBAL_EVENT_ID });
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
-
-  if (!event) {
-    return <Navigate to="/" replace />;
-  }
 
   return (
     <div className="wrap">
       <AppHeader
         action={
-          <Link to="/host" className={styles.backBtn}>
-            ← back
+          <Link to="/" className={styles.backBtn}>
+            ← voltar
           </Link>
         }
       />
 
       <main>
         {loading && media.length === 0 ? (
-          <div className={styles.loading}>gathering memories…</div>
+          <div className={styles.loading}>reunindo memórias…</div>
         ) : error && media.length === 0 ? (
           <ErrorState message={error.message} />
         ) : media.length === 0 ? (
-          <EmptyState eventName={event.name} onRefresh={() => void refresh()} />
+          <EmptyState eventName={GLOBAL_EVENT_NAME} onRefresh={() => void refresh()} />
         ) : (
           <>
             <div className={styles.head}>
               <div>
-                <h1 className={styles.title}>{event.name}</h1>
+                <h1 className={styles.title}>{GLOBAL_EVENT_NAME}</h1>
                 <div className={styles.count}>
-                  {media.length} {media.length === 1 ? 'memory' : 'memories'}
+                  {media.length} {media.length === 1 ? 'lembrança' : 'lembranças'}
                 </div>
               </div>
               <button type="button" className={styles.refreshBtn} onClick={() => void refresh()}>
-                ↻ refresh
+                ↻ atualizar
               </button>
             </div>
             <GalleryGrid media={media} onSelect={setLightboxIndex} />
@@ -60,7 +55,7 @@ export function GalleryPage() {
         />
       )}
 
-      <footer className="app-footer">refreshes every few seconds ✿</footer>
+      <footer className="app-footer">atualiza a cada poucos segundos ✿</footer>
     </div>
   );
 }
@@ -71,7 +66,7 @@ function EmptyState({ eventName, onRefresh }: { eventName: string; onRefresh: ()
       <div className={styles.head}>
         <h1 className={styles.title}>{eventName}</h1>
         <button type="button" className={styles.refreshBtn} onClick={onRefresh}>
-          ↻ refresh
+          ↻ atualizar
         </button>
       </div>
       <div className={styles.empty}>
@@ -91,8 +86,8 @@ function EmptyState({ eventName, onRefresh }: { eventName: string; onRefresh: ()
             <path d="M21 15l-5-5L5 21" />
           </svg>
         </div>
-        <h2>no photos yet</h2>
-        <p>share the QR with your guests to begin</p>
+        <h2>ainda não há fotos</h2>
+        <p>pede aos convidados para enviarem as suas lembranças do batizado</p>
       </div>
     </>
   );
@@ -102,7 +97,7 @@ function ErrorState({ message }: { message: string }) {
   return (
     <div className={styles.empty}>
       <div className={styles.emptyIcon}>!</div>
-      <h2>could not load</h2>
+      <h2>não foi possível carregar</h2>
       <p>{message}</p>
     </div>
   );

@@ -66,7 +66,7 @@ src/
 │   ├── cloudinary/         # Upload + media repository (Zod-validated)
 │   └── storage/            # Typed localStorage wrapper
 ├── shared/                 # Cross-feature primitives
-│   ├── components/         # AppHeader, Button, Logo, ToastProvider, SetupNotice
+│   ├── components/         # AppHeader, Button, Logo, ToastProvider
 │   ├── hooks/              # useToast
 │   ├── styles/             # globals.css with CSS variables
 │   └── utils/              # format helpers (slugify, fmtBytes, etc.)

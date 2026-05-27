@@ -42,9 +42,8 @@ function QueueItem({ item }: { item: UploadItem }) {
         </div>
       </div>
       <span
-        className={`${styles.statusIcon} ${item.status === 'uploading' ? styles.spinning : ''} ${
-          item.status === 'done' ? styles.statusDone : ''
-        } ${item.status === 'failed' ? styles.statusFailed : ''}`}
+        className={`${styles.statusIcon} ${item.status === 'uploading' ? styles.spinning : ''} ${item.status === 'done' ? styles.statusDone : ''
+          } ${item.status === 'failed' ? styles.statusFailed : ''}`}
         aria-label={item.status}
       >
         {statusIcon}
@@ -69,12 +68,12 @@ function getMetaText(item: UploadItem): string {
   const size = formatBytes(item.file.size);
   switch (item.status) {
     case 'pending':
-      return `${size} · waiting`;
+      return `${size} · em espera`;
     case 'uploading':
-      return `${size} · sending…`;
+      return `${size} · a enviar…`;
     case 'done':
-      return `${size} · sent`;
+      return `${size} · enviado`;
     case 'failed':
-      return item.error ?? 'something went wrong';
+      return item.error ?? 'erro desconhecido';
   }
 }

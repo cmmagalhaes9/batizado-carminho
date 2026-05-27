@@ -63,7 +63,7 @@ export function DropZone({ onFiles, disabled = false }: DropZoneProps) {
         onClick={() => fileInputRef.current?.click()}
         role="button"
         tabIndex={0}
-        aria-label="Pick photos from camera roll"
+        aria-label="Escolher fotos da galeria"
       >
         <input
           ref={fileInputRef}
@@ -81,8 +81,8 @@ export function DropZone({ onFiles, disabled = false }: DropZoneProps) {
             <path d="M21 15l-5-5L5 21" />
           </svg>
         </div>
-        <div className={styles.title}>pick from your camera roll</div>
-        <div className={styles.hint}>photos · videos · all welcome</div>
+        <div className={styles.title}>escolhe da galeria</div>
+        <div className={styles.hint}>fotos · vídeos</div>
       </div>
 
       <button
@@ -113,7 +113,7 @@ export function DropZone({ onFiles, disabled = false }: DropZoneProps) {
           <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z" />
           <circle cx="12" cy="13" r="3" />
         </svg>
-        take a photo now
+        tira uma foto agora
       </button>
     </>
   );

@@ -15,10 +15,10 @@ export function GalleryGrid({ media, onSelect }: GalleryGridProps) {
           type="button"
           className={styles.tile}
           onClick={() => onSelect(idx)}
-          aria-label={`View memory ${idx + 1} of ${media.length}${item.guestName ? ` by ${item.guestName}` : ''}`}
+          aria-label={`Ver lembrança ${idx + 1} de ${media.length}${item.guestName ? ` por ${item.guestName}` : ''}`}
         >
           <img src={item.thumbUrl} alt="" loading="lazy" />
-          {item.kind === 'video' && <span className={styles.videoMark}>▶ video</span>}
+          {item.kind === 'video' && <span className={styles.videoMark}>▶ vídeo</span>}
           {item.guestName && <span className={styles.guestTag}>{item.guestName}</span>}
         </button>
       ))}

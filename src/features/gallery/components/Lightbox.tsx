@@ -30,14 +30,14 @@ export function Lightbox({ media, currentIndex, onClose, onNavigate }: LightboxP
   if (!item) return null;
 
   return (
-    <div className={styles.lightbox} role="dialog" aria-modal="true" aria-label="Media viewer">
-      <button type="button" className={styles.close} onClick={onClose} aria-label="Close">
+    <div className={styles.lightbox} role="dialog" aria-modal="true" aria-label="visualizador de mídia">
+      <button type="button" className={styles.close} onClick={onClose} aria-label="Fechar">
         ×
       </button>
-      <button type="button" className={`${styles.nav} ${styles.prev}`} onClick={previous} aria-label="Previous">
+      <button type="button" className={`${styles.nav} ${styles.prev}`} onClick={previous} aria-label="Anterior">
         ‹
       </button>
-      <button type="button" className={`${styles.nav} ${styles.next}`} onClick={next} aria-label="Next">
+      <button type="button" className={`${styles.nav} ${styles.next}`} onClick={next} aria-label="Próximo">
         ›
       </button>
 
@@ -52,7 +52,7 @@ export function Lightbox({ media, currentIndex, onClose, onNavigate }: LightboxP
       <div className={styles.info}>
         {item.guestName && (
           <>
-            by <strong>{item.guestName}</strong> ·{' '}
+            por <strong>{item.guestName}</strong> ·{' '}
           </>
         )}
         {currentIndex + 1} of {media.length}

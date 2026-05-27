@@ -7,7 +7,7 @@ interface EventBannerProps {
 export function EventBanner({ eventName }: EventBannerProps) {
   return (
     <section className={styles.banner}>
-      <div className={styles.decor}>you're invited to</div>
+      <div className={styles.decor}>partilha uma memória</div>
       <div className={styles.name}>{eventName}</div>
     </section>
   );

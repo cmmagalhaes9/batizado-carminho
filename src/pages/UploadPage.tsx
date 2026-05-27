@@ -1,6 +1,5 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { AppHeader } from '@shared/components/AppHeader';
-import { parseGuestHash } from '@features/events/services/guestLink';
 import { EventBanner } from '@features/upload/components/EventBanner';
 import { GuestNameCard } from '@features/upload/components/GuestNameCard';
 import { DropZone } from '@features/upload/components/DropZone';
@@ -10,34 +9,21 @@ import { useGuestName } from '@features/upload/hooks/useGuestName';
 import { useUploadQueue } from '@features/upload/hooks/useUploadQueue';
 import { useToast } from '@shared/components/useToast';
 import { isConfigured } from '@config/env';
+import { GLOBAL_EVENT_ID, GLOBAL_EVENT_NAME } from '@features/events/services/globalEvent';
 import styles from './UploadPage.module.css';
 
 export function UploadPage() {
-  // Parse event info from the URL hash once on mount; track in state so we
-  // can react if a guest navigates with the back/forward buttons.
-  const [eventInfo, setEventInfo] = useState(() => parseGuestHash(window.location.hash));
-
-  useEffect(() => {
-    const onHashChange = () => setEventInfo(parseGuestHash(window.location.hash));
-    window.addEventListener('hashchange', onHashChange);
-    return () => window.removeEventListener('hashchange', onHashChange);
-  }, []);
-
-  if (!eventInfo) {
-    return <ErrorScreen icon="🔗" title="this link looks incomplete" message="ask the host to share the QR code or full link again" />;
-  }
-
   if (!isConfigured()) {
     return (
       <ErrorScreen
         icon="⚙️"
-        title="not quite ready yet"
-        message="the host needs to finish a small setup step. see README for details."
+        title="ainda não está pronto"
+        message="a app precisa ser configurada. veja o README para detalhes."
       />
     );
   }
 
-  return <UploadFlow eventId={eventInfo.eventId} eventName={eventInfo.eventName} />;
+  return <UploadFlow eventId={GLOBAL_EVENT_ID} eventName={GLOBAL_EVENT_NAME} />;
 }
 
 function UploadFlow({ eventId, eventName }: { eventId: string; eventName: string }) {
@@ -53,7 +39,7 @@ function UploadFlow({ eventId, eventName }: { eventId: string; eventName: string
   const handleFiles = useMemo(
     () => (files: readonly File[]) => {
       if (!name) {
-        showToast('add your name first ✿');
+        showToast('adicione seu nome primeiro ✿');
         return;
       }
       enqueue(files);
@@ -72,23 +58,23 @@ function UploadFlow({ eventId, eventName }: { eventId: string; eventName: string
 
         <section className="card">
           <h2 className="heading">
-            share a memory <span className="accent">♡</span>
+            partilha uma lembrança <span className="accent">♡</span>
           </h2>
           <p className="lead" style={{ fontSize: 14, marginBottom: 18 }}>
-            your photos and videos go straight to the host's album
+            as tuas fotos e vídeos vão direto para o álbum do batizado
           </p>
 
           <DropZone onFiles={handleFiles} disabled={!name} />
 
           <UploadQueueList items={items} />
 
-          <p className={styles.help}>tip: you can pick a bunch at once ✿</p>
+          <p className={styles.help}>dica: podes selecionar várias de uma vez ✿</p>
         </section>
 
         <SuccessBadge count={successCount} />
       </main>
 
-      <footer className="app-footer">thank you for sharing ♡</footer>
+      <footer className="app-footer">obrigada por partilhares ♡</footer>
     </div>
   );
 }
