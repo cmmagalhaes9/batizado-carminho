@@ -6,17 +6,6 @@ Free · No signup for guests · Mobile-first · Deploys to GitHub Pages or Verce
 
 ---
 
-### Step 5 — Deploy
-
-#### Option A · Vercel (easiest, shorter URL)
-
-1. Push your code to GitHub
-2. Go to [vercel.com/new](https://vercel.com/new) and import the repo
-3. In the project settings, add the same env variables from `.env.local`
-4. Deploy
-
-Your site goes live at `https://your-project.vercel.app/`. The QR code will use this URL automatically.
-
 #### Option B · GitHub Pages (free, but URL is longer)
 
 1. Update `.env.local` to set the base path:
