@@ -1,0 +1,76 @@
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(74, 58, 53, 0.95);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.content {
+  max-width: 96vw;
+  max-height: 80vh;
+}
+
+.content img,
+.content video {
+  max-width: 96vw;
+  max-height: 80vh;
+  border-radius: 12px;
+  display: block;
+}
+
+.close,
+.nav {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: white;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  font-family: inherit;
+}
+
+.close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 22px;
+}
+
+.info {
+  position: absolute;
+  bottom: 24px;
+  left: 16px;
+  right: 16px;
+  color: white;
+  text-align: center;
+  font-family: 'Caveat', cursive;
+  font-size: 20px;
+}
+
+.info strong {
+  color: var(--pink);
+  font-weight: 600;
+}
+
+.nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  font-size: 22px;
+}
+
+.prev {
+  left: 12px;
+}
+
+.next {
+  right: 12px;
+}

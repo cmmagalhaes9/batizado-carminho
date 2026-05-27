@@ -1,0 +1,109 @@
+.queue {
+  margin-top: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.item {
+  background: var(--cream);
+  border-radius: 16px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid var(--line);
+  animation: slideIn 0.35s ease;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.thumb {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background-color: var(--line);
+  background-size: cover;
+  background-position: center;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.videoIcon {
+  font-size: 20px;
+  color: var(--pink-deep);
+}
+
+.info {
+  flex: 1;
+  min-width: 0;
+}
+
+.name {
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--ink);
+}
+
+.meta {
+  font-family: 'Caveat', cursive;
+  font-size: 15px;
+  color: var(--muted);
+  margin-top: 1px;
+}
+
+.barWrap {
+  height: 4px;
+  background: var(--line);
+  border-radius: 2px;
+  margin-top: 6px;
+  overflow: hidden;
+}
+
+.bar {
+  height: 100%;
+  background: var(--pink-deep);
+  border-radius: 2px;
+  transition: width 0.2s;
+}
+
+.barDone {
+  background: var(--sage-deep);
+}
+
+.statusIcon {
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.spinning {
+  animation: gentleSpin 1.5s linear infinite;
+}
+
+.statusDone {
+  color: var(--sage-deep);
+}
+
+.statusFailed {
+  color: var(--pink-deep);
+}
+
+@keyframes gentleSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}

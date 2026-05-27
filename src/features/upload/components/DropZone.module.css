@@ -1,0 +1,89 @@
+.dropZone {
+  border: 2px dashed var(--line);
+  border-radius: 22px;
+  padding: 38px 24px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: var(--cream);
+  position: relative;
+  margin-bottom: 12px;
+}
+
+.dropZone:hover {
+  border-color: var(--pink-deep);
+}
+
+.over {
+  border-color: var(--pink-deep);
+  background: var(--peach);
+}
+
+.hiddenInput {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+  font-size: 0;
+}
+
+.iconWrap {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 14px;
+  background: var(--pink);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.iconWrap svg {
+  width: 28px;
+  height: 28px;
+  color: var(--ink);
+}
+
+.title {
+  font-family: 'Fraunces', serif;
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 4px;
+  color: var(--ink);
+}
+
+.hint {
+  font-family: 'Caveat', cursive;
+  font-size: 16px;
+  color: var(--muted);
+}
+
+.cameraBtn {
+  width: 100%;
+  padding: 16px 20px;
+  background: var(--ink);
+  color: var(--cream);
+  border: none;
+  border-radius: 18px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+.cameraBtn:hover {
+  background: #3a2d29;
+  transform: translateY(-1px);
+}
+
+.cameraBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

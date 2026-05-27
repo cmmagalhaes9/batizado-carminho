@@ -1,0 +1,33 @@
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--ink);
+}
+
+.mark {
+  width: 36px;
+  height: 36px;
+  background: var(--pink);
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.mark svg {
+  width: 18px;
+  height: 18px;
+  color: var(--ink);
+}
+
+.text {
+  font-family: 'Caveat', cursive;
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: var(--ink);
+  line-height: 1;
+}

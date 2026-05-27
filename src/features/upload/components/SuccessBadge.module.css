@@ -1,0 +1,49 @@
+.badge {
+  background: var(--sage);
+  color: var(--ink);
+  border-radius: 22px;
+  padding: 26px 22px;
+  text-align: center;
+  margin-bottom: 20px;
+  animation: pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.heart {
+  width: 44px;
+  height: 44px;
+  margin: 0 auto 8px;
+  color: var(--ink);
+}
+
+.badge h3 {
+  font-family: 'Fraunces', serif;
+  font-size: 22px;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.badge h3 em {
+  font-family: 'Caveat', cursive;
+  font-style: normal;
+  font-size: 1.3em;
+  color: var(--pink-deep);
+}
+
+.badge p {
+  font-family: 'Caveat', cursive;
+  font-size: 18px;
+  opacity: 0.8;
+}

@@ -1,0 +1,228 @@
+.body {
+  background: #2c211d;
+  color: #fdf9f3;
+  font-family: 'Fraunces', serif;
+  overflow: hidden;
+  height: 100vh;
+  cursor: none;
+  position: relative;
+}
+
+.body:hover {
+  cursor: default;
+}
+
+.progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: rgba(253, 249, 243, 0.05);
+  z-index: 15;
+  overflow: hidden;
+}
+
+.progressBar {
+  height: 100%;
+  background: linear-gradient(90deg, #f4d4cf 0%, #d99a8e 100%);
+  transition: width 0.1s linear;
+}
+
+.titleBar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 24px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 10;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s;
+  background: linear-gradient(180deg, rgba(44, 33, 29, 0.6) 0%, transparent 100%);
+}
+
+.body:hover .titleBar {
+  opacity: 1;
+}
+
+.eventTitle {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 22px;
+  letter-spacing: -0.2px;
+}
+
+.heart {
+  display: inline-block;
+  color: #d99a8e;
+  margin-right: 8px;
+  font-style: normal;
+}
+
+.counter {
+  font-family: 'Caveat', cursive;
+  font-size: 20px;
+  opacity: 0.6;
+}
+
+.ambient {
+  position: absolute;
+  inset: -15%;
+  background-size: cover;
+  background-position: center;
+  filter: blur(100px) brightness(0.4) saturate(1.2);
+  transform: scale(1.15);
+  z-index: 0;
+}
+
+.stage {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 1.2s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.slide img,
+.slide video {
+  max-width: 88vw;
+  max-height: 84vh;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 30px 100px rgba(0, 0, 0, 0.5);
+}
+
+.caption {
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(44, 33, 29, 0.6);
+  backdrop-filter: blur(20px);
+  padding: 14px 28px;
+  border-radius: 100px;
+  font-family: 'Caveat', cursive;
+  font-size: 24px;
+  letter-spacing: 0.5px;
+  z-index: 10;
+  border: 1px solid rgba(244, 212, 207, 0.15);
+  color: #fdf9f3;
+}
+
+.by {
+  color: rgba(253, 249, 243, 0.55);
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 16px;
+  margin-right: 8px;
+}
+
+.controls {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  display: flex;
+  gap: 8px;
+  z-index: 20;
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.body:hover .controls {
+  opacity: 1;
+}
+
+.ctrl {
+  width: 44px;
+  height: 44px;
+  background: rgba(253, 249, 243, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(253, 249, 243, 0.15);
+  color: #fdf9f3;
+  border-radius: 50%;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-family: inherit;
+}
+
+.ctrl:hover {
+  background: rgba(253, 249, 243, 0.18);
+}
+
+.centerMsg {
+  position: fixed;
+  inset: 0;
+  background: #2c211d;
+  color: #fdf9f3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+}
+
+.iconWrap {
+  width: 80px;
+  height: 80px;
+  background: rgba(244, 212, 207, 0.2);
+  border-radius: 50%;
+  margin: 0 auto 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #f4d4cf;
+}
+
+.centerMsg h1 {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 36px;
+  margin-bottom: 8px;
+  font-weight: 400;
+  letter-spacing: -0.5px;
+}
+
+.centerMsg p {
+  opacity: 0.6;
+  font-family: 'Caveat', cursive;
+  font-size: 22px;
+}
+
+.backLink {
+  color: #d99a8e;
+  text-decoration: none;
+  margin-top: 24px;
+  font-family: 'Caveat', cursive;
+  font-size: 20px;
+  border-bottom: 1px dashed currentColor;
+}

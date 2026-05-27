@@ -1,0 +1,11 @@
+.header {
+  padding: 32px 0 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.action {
+  flex-shrink: 0;
+}
