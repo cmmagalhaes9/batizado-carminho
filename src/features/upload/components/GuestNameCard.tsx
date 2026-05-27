@@ -16,7 +16,7 @@ export function GuestNameCard({ name, onSave, onClear }: GuestNameCardProps) {
   return <NameForm onSave={onSave} />;
 }
 
-function Greeted({ name, onClear }: { name: string; onClear: () => void }) {
+function Greeted({ name }: { name: string; onClear: () => void }) {
   return (
     <div className={styles.greeted}>
       <div className={styles.greetedMsg}>
