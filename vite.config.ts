@@ -3,10 +3,9 @@ import react from '@vitejs/plugin-react';
 import path from 'node:path';
 
 // https://vitejs.dev/config/
-// VITE_BASE_PATH lets you deploy to GH Pages under a subpath like /little-memories/
-// Set it via env or override in CI. Defaults to '/' (root).
-export default defineConfig(({ mode }) => ({
-  base: mode === 'production' ? process.env.VITE_BASE_PATH ?? '/' : '/',
+// The app deploys from the site root.
+export default defineConfig({
+  base: '/',
   plugins: [react()],
   resolve: {
     alias: {

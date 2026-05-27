@@ -13,7 +13,6 @@ import { z } from 'zod';
 const envSchema = z.object({
   VITE_CLOUDINARY_CLOUD_NAME: z.string().default(''),
   VITE_CLOUDINARY_UPLOAD_PRESET: z.string().default(''),
-  VITE_BASE_PATH: z.string().default('/'),
 });
 
 export type AppEnv = z.infer<typeof envSchema>;
@@ -30,9 +29,6 @@ function loadEnv(): AppEnv {
 
 export const env = loadEnv();
 
-/**
- * Whether the app has the credentials it needs to talk to Cloudinary.
- */
 export const isConfigured = (): boolean =>
   env.VITE_CLOUDINARY_CLOUD_NAME.trim().length > 0 &&
   env.VITE_CLOUDINARY_UPLOAD_PRESET.trim().length > 0;
