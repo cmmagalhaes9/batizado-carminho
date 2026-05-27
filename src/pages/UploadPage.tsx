@@ -1,6 +1,5 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useMemo } from 'react';
 import { AppHeader } from '@shared/components/AppHeader';
-import { Button } from '@shared/components/Button';
 import { EventBanner } from '@features/upload/components/EventBanner';
 import { GuestNameCard } from '@features/upload/components/GuestNameCard';
 import { DropZone } from '@features/upload/components/DropZone';
@@ -27,30 +26,14 @@ export function UploadPage() {
   return <UploadFlow eventId={GLOBAL_EVENT_ID} eventName={GLOBAL_EVENT_NAME} />;
 }
 
-interface SelectedFile {
-  readonly file: File;
-  readonly previewUrl: string | null;
-}
-
 function UploadFlow({ eventId, eventName }: { eventId: string; eventName: string }) {
   const { name, setName, clearName } = useGuestName();
   const { showToast } = useToast();
 
-  // useUploadQueue requires a guestName — use empty string when missing, and gate the UI instead.
   const { items, successCount, enqueue } = useUploadQueue({
     eventId,
     guestName: name ?? '',
   });
-
-  const [selectedFiles, setSelectedFiles] = useState<SelectedFile[]>([]);
-  const previewUrlsRef = useRef<string[]>([]);
-
-  useEffect(() => {
-    return () => {
-      previewUrlsRef.current.forEach((url) => URL.revokeObjectURL(url));
-      previewUrlsRef.current = [];
-    };
-  }, []);
 
   const handleFiles = useMemo(
     () => (files: readonly File[]) => {
@@ -59,25 +42,14 @@ function UploadFlow({ eventId, eventName }: { eventId: string; eventName: string
         return;
       }
 
-      const nextFiles = files.map((file) => {
-        const previewUrl = file.type.startsWith('image/') ? URL.createObjectURL(file) : null;
-        if (previewUrl) previewUrlsRef.current.push(previewUrl);
-        return { file, previewUrl };
-      });
+      console.log('[UploadPage] Files selected:', files.length);
 
-      setSelectedFiles((prev) => [...prev, ...nextFiles]);
+      // Go straight to upload, skip preview
+      enqueue(files);
+      showToast(`a enviar ${files.length} ficheiro${files.length === 1 ? '' : 's'}…`);
     },
-    [name, showToast],
+    [name, enqueue, showToast],
   );
-
-  const handleSubmit = () => {
-    if (selectedFiles.length === 0) {
-      showToast('seleciona pelo menos uma foto primeiro ✿');
-      return;
-    }
-    enqueue(selectedFiles.map((item) => item.file));
-    setSelectedFiles([]);
-  };
 
   return (
     <div className="wrap">
@@ -97,29 +69,6 @@ function UploadFlow({ eventId, eventName }: { eventId: string; eventName: string
           </p>
 
           <DropZone onFiles={handleFiles} disabled={!name} />
-
-          {selectedFiles.length > 0 && (
-            <div className={styles.previewPanel}>
-              <div className={styles.previewHeader}>
-                <div>{selectedFiles.length} ficheiro{selectedFiles.length === 1 ? '' : 's'} selecionado{selectedFiles.length === 1 ? '' : 's'}</div>
-                <Button type="button" variant="pink" onClick={handleSubmit}>
-                  enviar selecionados
-                </Button>
-              </div>
-              <div className={styles.previewList}>
-                {selectedFiles.map((item, index) => (
-                  <div key={`${item.file.name}-${index}`} className={styles.previewItem}>
-                    {item.previewUrl ? (
-                      <img src={item.previewUrl} alt={item.file.name} />
-                    ) : (
-                      <div className={styles.previewFallback}>✿</div>
-                    )}
-                    <div className={styles.previewName}>{item.file.name}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
 
           <UploadQueueList items={items} />
 
