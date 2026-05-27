@@ -40,9 +40,9 @@
 .previewPanel {
   margin-top: 24px;
   padding: 16px;
-  border: 1px solid var(--border);
+  border: 1px solid #e0d4cc;
   border-radius: 18px;
-  background: var(--surface);
+  background: #fdf9f3;
 }
 
 .previewHeader {
@@ -51,29 +51,30 @@
   justify-content: space-between;
   gap: 12px;
   margin-bottom: 16px;
+  font-size: 14px;
+  font-weight: 500;
 }
 
 .previewList {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
-  gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 12px;
 }
 
 .previewItem {
-  border-radius: 18px;
+  border-radius: 12px;
   overflow: hidden;
-  background: var(--bg);
-  border: 1px solid var(--border);
-  min-height: 110px;
+  background: white;
+  border: 1px solid #e0d4cc;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 }
 
 .previewItem img {
   width: 100%;
   height: 100px;
   object-fit: cover;
+  display: block;
 }
 
 .previewFallback {
@@ -81,13 +82,17 @@
   height: 100px;
   display: grid;
   place-items: center;
-  color: var(--muted);
-  font-size: 24px;
+  background: #f5efe8;
+  color: #b0a097;
+  font-size: 28px;
 }
 
 .previewName {
-  padding: 10px;
-  font-size: 13px;
-  line-height: 1.3;
-  color: var(--text);
+  padding: 8px;
+  font-size: 12px;
+  line-height: 1.4;
+  color: #3d3d3d;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

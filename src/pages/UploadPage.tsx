@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { AppHeader } from '@shared/components/AppHeader';
 import { Button } from '@shared/components/Button';
 import { EventBanner } from '@features/upload/components/EventBanner';
@@ -43,14 +43,14 @@ function UploadFlow({ eventId, eventName }: { eventId: string; eventName: string
   });
 
   const [selectedFiles, setSelectedFiles] = useState<SelectedFile[]>([]);
+  const previewUrlsRef = useRef<string[]>([]);
 
   useEffect(() => {
     return () => {
-      selectedFiles.forEach((item) => {
-        if (item.previewUrl) URL.revokeObjectURL(item.previewUrl);
-      });
+      previewUrlsRef.current.forEach((url) => URL.revokeObjectURL(url));
+      previewUrlsRef.current = [];
     };
-  }, [selectedFiles]);
+  }, []);
 
   const handleFiles = useMemo(
     () => (files: readonly File[]) => {
@@ -59,10 +59,12 @@ function UploadFlow({ eventId, eventName }: { eventId: string; eventName: string
         return;
       }
 
-      const nextFiles = files.map((file) => ({
-        file,
-        previewUrl: file.type.startsWith('image/') ? URL.createObjectURL(file) : null,
-      }));
+      const nextFiles = files.map((file) => {
+        const previewUrl = file.type.startsWith('image/') ? URL.createObjectURL(file) : null;
+        if (previewUrl) previewUrlsRef.current.push(previewUrl);
+        return { file, previewUrl };
+      });
+
       setSelectedFiles((prev) => [...prev, ...nextFiles]);
     },
     [name, showToast],
