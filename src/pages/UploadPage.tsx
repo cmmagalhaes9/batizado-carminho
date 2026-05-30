@@ -42,7 +42,7 @@ function UploadFlow({ eventId, eventName }: { eventId: string; eventName: string
   const handleFiles = useCallback(
     (files: readonly File[]) => {
       if (!name) {
-        showToast('adicione o teu nome primeiro ✿');
+        showToast('adicione o teu nome primeiro');
         return;
       }
       pendingUrlsRef.current.forEach((u) => u && URL.revokeObjectURL(u));
@@ -123,7 +123,7 @@ function UploadFlow({ eventId, eventName }: { eventId: string; eventName: string
 
           <UploadQueueList items={items} />
 
-          {!hasPending && <p className={styles.help}>dica: podes selecionar várias de uma vez ✿</p>}
+          {!hasPending && <p className={styles.help}>dica: podes selecionar várias de uma vez</p>}
         </section>
 
         <SuccessBadge count={successCount} />

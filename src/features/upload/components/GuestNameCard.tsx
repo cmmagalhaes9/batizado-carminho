@@ -20,7 +20,7 @@ function Greeted({ name }: { name: string; onClear: () => void }) {
   return (
     <div className={styles.greeted}>
       <div className={styles.greetedMsg}>
-        Olá, <strong>{name}</strong> ✿
+        Olá, <strong>{name}</strong>
       </div>
     </div>
   );
@@ -33,7 +33,7 @@ function NameForm({ onSave }: { onSave: (name: string) => void }) {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!value.trim()) {
-      showToast('adiciona o teu nome primeiro ✿');
+      showToast('adiciona o teu nome primeiro');
       return;
     }
     onSave(value.trim());

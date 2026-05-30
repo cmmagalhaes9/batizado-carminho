@@ -55,7 +55,7 @@ export function GalleryPage() {
         />
       )}
 
-      <footer className="app-footer">atualiza a cada poucos segundos ✿</footer>
+      <footer className="app-footer">atualiza a cada poucos segundos</footer>
     </div>
   );
 }
