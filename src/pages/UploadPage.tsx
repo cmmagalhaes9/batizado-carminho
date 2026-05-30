@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { AppHeader } from '@shared/components/AppHeader';
 import { EventBanner } from '@features/upload/components/EventBanner';
 import { GuestNameCard } from '@features/upload/components/GuestNameCard';
@@ -35,21 +35,42 @@ function UploadFlow({ eventId, eventName }: { eventId: string; eventName: string
     guestName: name ?? '',
   });
 
-  const handleFiles = useMemo(
-    () => (files: readonly File[]) => {
+  const [pendingFiles, setPendingFiles] = useState<readonly File[]>([]);
+  const [pendingUrls, setPendingUrls] = useState<readonly string[]>([]);
+  const pendingUrlsRef = useRef<readonly string[]>([]);
+
+  const handleFiles = useCallback(
+    (files: readonly File[]) => {
       if (!name) {
         showToast('adicione o teu nome primeiro ✿');
         return;
       }
-
-      console.log('[UploadPage] Files selected:', files.length);
-
-      // Go straight to upload, skip preview
-      enqueue(files);
-      showToast(`a enviar ${files.length} ficheiro${files.length === 1 ? '' : 's'}…`);
+      pendingUrlsRef.current.forEach((u) => u && URL.revokeObjectURL(u));
+      const urls = files.map((f) => (f.type.startsWith('image/') ? URL.createObjectURL(f) : ''));
+      pendingUrlsRef.current = urls;
+      setPendingFiles(files);
+      setPendingUrls(urls);
     },
-    [name, enqueue, showToast],
+    [name, showToast],
   );
+
+  const handleConfirm = useCallback(() => {
+    enqueue(pendingFiles);
+    showToast(`a enviar ${pendingFiles.length} ficheiro${pendingFiles.length === 1 ? '' : 's'}…`);
+    pendingUrlsRef.current.forEach((u) => u && URL.revokeObjectURL(u));
+    pendingUrlsRef.current = [];
+    setPendingFiles([]);
+    setPendingUrls([]);
+  }, [pendingFiles, enqueue, showToast]);
+
+  const handleCancel = useCallback(() => {
+    pendingUrlsRef.current.forEach((u) => u && URL.revokeObjectURL(u));
+    pendingUrlsRef.current = [];
+    setPendingFiles([]);
+    setPendingUrls([]);
+  }, []);
+
+  const hasPending = pendingFiles.length > 0;
 
   return (
     <div className="wrap">
@@ -70,9 +91,39 @@ function UploadFlow({ eventId, eventName }: { eventId: string; eventName: string
 
           <DropZone onFiles={handleFiles} disabled={!name} />
 
+          {hasPending && (
+            <div className={styles.previewPanel}>
+              <div className={styles.previewHeader}>
+                <span>{pendingFiles.length} ficheiro{pendingFiles.length === 1 ? '' : 's'} selecionado{pendingFiles.length === 1 ? '' : 's'}</span>
+                <button type="button" onClick={handleCancel} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--muted)', fontSize: 13 }}>
+                  cancelar
+                </button>
+              </div>
+              <div className={styles.previewList}>
+                {pendingFiles.map((file, i) => (
+                  <div key={i} className={styles.previewItem}>
+                    {pendingUrls[i] ? (
+                      <img src={pendingUrls[i]} alt={file.name} />
+                    ) : (
+                      <div className={styles.previewFallback}>▶</div>
+                    )}
+                    <div className={styles.previewName}>{file.name}</div>
+                  </div>
+                ))}
+              </div>
+              <button
+                type="button"
+                onClick={handleConfirm}
+                style={{ marginTop: 16, width: '100%', padding: '14px 20px', background: 'var(--ink)', color: 'var(--cream)', border: 'none', borderRadius: 18, fontFamily: "'Nunito', sans-serif", fontSize: 15, fontWeight: 600, cursor: 'pointer' }}
+              >
+                enviar ♡
+              </button>
+            </div>
+          )}
+
           <UploadQueueList items={items} />
 
-          <p className={styles.help}>dica: podes selecionar várias de uma vez ✿</p>
+          {!hasPending && <p className={styles.help}>dica: podes selecionar várias de uma vez ✿</p>}
         </section>
 
         <SuccessBadge count={successCount} />
