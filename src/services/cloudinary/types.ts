@@ -29,7 +29,7 @@ export type CloudinaryUploadResponse = z.infer<typeof cloudinaryUploadResponseSc
 const cloudinaryListResourceSchema = z.object({
   public_id: z.string(),
   format: z.string(),
-  bytes: z.number(),
+  bytes: z.number().optional(),
   created_at: z.string(),
   context: z
     .object({

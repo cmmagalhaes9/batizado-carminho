@@ -35,8 +35,8 @@ export interface MediaItem {
   readonly thumbUrl: string;
   /** Original upload timestamp (ISO string). */
   readonly createdAt: string;
-  /** Bytes. */
-  readonly bytes: number;
+  /** Bytes. Absent when fetched from the list endpoint (Cloudinary omits it there). */
+  readonly bytes?: number;
   /** Guest who uploaded it, if known. */
   readonly guestName: string | null;
 }
