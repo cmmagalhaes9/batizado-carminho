@@ -14,6 +14,12 @@
   border-color: var(--pink-deep);
 }
 
+.dropZoneDisabled {
+  opacity: 0.55;
+  cursor: default;
+  pointer-events: none;
+}
+
 .over {
   border-color: var(--pink-deep);
   background: var(--peach);

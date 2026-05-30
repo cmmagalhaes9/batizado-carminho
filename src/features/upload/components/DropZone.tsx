@@ -55,15 +55,16 @@ export function DropZone({ onFiles, disabled = false }: DropZoneProps) {
   return (
     <>
       <div
-        className={`${styles.dropZone} ${isDragging ? styles.over : ''}`}
-        onDragEnter={handleDragEnter}
-        onDragLeave={handleDragLeave}
-        onDragOver={handleDragOver}
-        onDrop={handleDrop}
-        onClick={() => fileInputRef.current?.click()}
+        className={`${styles.dropZone} ${isDragging ? styles.over : ''} ${disabled ? styles.dropZoneDisabled : ''}`}
+        onDragEnter={disabled ? undefined : handleDragEnter}
+        onDragLeave={disabled ? undefined : handleDragLeave}
+        onDragOver={disabled ? undefined : handleDragOver}
+        onDrop={disabled ? undefined : handleDrop}
+        onClick={disabled ? undefined : () => fileInputRef.current?.click()}
         role="button"
-        tabIndex={0}
+        tabIndex={disabled ? -1 : 0}
         aria-label="Escolher fotos da galeria"
+        aria-disabled={disabled}
       >
         <input
           ref={fileInputRef}
@@ -82,13 +83,13 @@ export function DropZone({ onFiles, disabled = false }: DropZoneProps) {
           </svg>
         </div>
         <div className={styles.title}>escolhe da galeria</div>
-        <div className={styles.hint}>fotos · vídeos</div>
+        <div className={styles.hint}>{disabled ? 'adiciona o teu nome primeiro' : 'fotos · vídeos'}</div>
       </div>
 
       <button
         type="button"
         className={styles.cameraBtn}
-        onClick={() => cameraInputRef.current?.click()}
+        onClick={disabled ? undefined : () => cameraInputRef.current?.click()}
         disabled={disabled}
       >
         <input
@@ -97,6 +98,7 @@ export function DropZone({ onFiles, disabled = false }: DropZoneProps) {
           accept="image/*"
           capture="environment"
           onChange={handleFileChange}
+          disabled={disabled}
           className={styles.hiddenInput}
         />
         <svg
