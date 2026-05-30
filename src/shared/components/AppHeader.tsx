@@ -11,7 +11,7 @@ interface AppHeaderProps {
 
 export function AppHeader({ action, logoAsLink = true }: AppHeaderProps) {
   return (
-    <header className={styles.header}>
+    <header className={`${styles.header} ${action ? styles.headerWithAction : ''}`}>
       <Logo asLink={logoAsLink} />
       {action && <div className={styles.action}>{action}</div>}
     </header>

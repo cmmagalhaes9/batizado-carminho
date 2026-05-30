@@ -1,4 +1,17 @@
+/* Inputs live off-screen; labels reference them via htmlFor.
+   This avoids the iOS Safari double-trigger caused by the overlay pattern. */
+.offscreenInput {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
 .dropZone {
+  display: block;
   border: 1.5px dashed var(--rose);
   border-radius: var(--radius);
   padding: 36px 24px;
@@ -8,6 +21,8 @@
   background: rgba(242, 208, 216, 0.08);
   position: relative;
   margin-bottom: 12px;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
 }
 
 .dropZone:hover {
@@ -24,14 +39,6 @@
   opacity: 0.55;
   cursor: default;
   pointer-events: none;
-}
-
-.hiddenInput {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  cursor: pointer;
-  font-size: 0;
 }
 
 .iconWrap {
@@ -67,6 +74,7 @@
 }
 
 .cameraBtn {
+  display: flex;
   width: 100%;
   padding: 16px 20px;
   background: var(--ink);
@@ -78,12 +86,12 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s;
-  display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  position: relative;
-  overflow: hidden;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
 }
 
 .cameraBtn:hover {
@@ -91,7 +99,8 @@
   transform: translateY(-1px);
 }
 
-.cameraBtn:disabled {
+.cameraBtnDisabled {
   opacity: 0.5;
-  cursor: not-allowed;
+  cursor: default;
+  pointer-events: none;
 }

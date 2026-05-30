@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState, type ChangeEvent, type DragEvent } from 'react';
+import { useCallback, useId, useRef, useState, type ChangeEvent, type DragEvent } from 'react';
 import styles from './DropZone.module.css';
 
 interface DropZoneProps {
@@ -12,38 +12,43 @@ interface DropZoneProps {
  *  - Drag-and-drop on desktop
  *  - "Take a photo now" button (camera capture)
  *
- * The native <input type="file" capture="environment"> opens the camera directly
- * on mobile browsers — much smoother than guessing at MediaStream APIs.
+ * Uses <label htmlFor> instead of a transparent input overlay so that iOS Safari
+ * activates the file picker via the browser's native label→input path rather than
+ * a programmatic .click() call. Programmatic .click() causes a double-trigger on
+ * iOS: the input fires once from the touch, once from the label's onClick, and
+ * Safari cancels the picker.
  */
 export function DropZone({ onFiles, disabled = false }: DropZoneProps) {
-  const fileInputRef = useRef<HTMLInputElement>(null);
+  const galleryInputRef = useRef<HTMLInputElement>(null);
   const cameraInputRef = useRef<HTMLInputElement>(null);
   const [isDragging, setIsDragging] = useState(false);
+  const uid = useId();
+  const galleryId = `${uid}-gallery`;
+  const cameraId = `${uid}-camera`;
 
   const handleFileChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
       const files = e.target.files;
       if (files && files.length > 0) {
         onFiles(Array.from(files));
-        // Reset so the same file can be re-selected if needed
         e.target.value = '';
       }
     },
     [onFiles],
   );
 
-  const handleDragEnter = (e: DragEvent<HTMLDivElement>) => {
+  const handleDragEnter = (e: DragEvent<HTMLLabelElement>) => {
     e.preventDefault();
     setIsDragging(true);
   };
-  const handleDragLeave = (e: DragEvent<HTMLDivElement>) => {
+  const handleDragLeave = (e: DragEvent<HTMLLabelElement>) => {
     e.preventDefault();
     setIsDragging(false);
   };
-  const handleDragOver = (e: DragEvent<HTMLDivElement>) => {
+  const handleDragOver = (e: DragEvent<HTMLLabelElement>) => {
     e.preventDefault();
   };
-  const handleDrop = (e: DragEvent<HTMLDivElement>) => {
+  const handleDrop = (e: DragEvent<HTMLLabelElement>) => {
     e.preventDefault();
     setIsDragging(false);
     const files = e.dataTransfer.files;
@@ -54,27 +59,38 @@ export function DropZone({ onFiles, disabled = false }: DropZoneProps) {
 
   return (
     <>
-      <div
+      {/* Inputs live off-screen so the label click activates them without a
+          transparent overlay — the overlay pattern causes double-triggers on iOS. */}
+      <input
+        ref={galleryInputRef}
+        id={galleryId}
+        type="file"
+        multiple
+        accept="image/*,video/*"
+        onChange={handleFileChange}
+        disabled={disabled}
+        className={styles.offscreenInput}
+      />
+      <input
+        ref={cameraInputRef}
+        id={cameraId}
+        type="file"
+        accept="image/*"
+        capture="environment"
+        onChange={handleFileChange}
+        disabled={disabled}
+        className={styles.offscreenInput}
+      />
+
+      <label
+        htmlFor={galleryId}
         className={`${styles.dropZone} ${isDragging ? styles.over : ''} ${disabled ? styles.dropZoneDisabled : ''}`}
         onDragEnter={disabled ? undefined : handleDragEnter}
         onDragLeave={disabled ? undefined : handleDragLeave}
         onDragOver={disabled ? undefined : handleDragOver}
         onDrop={disabled ? undefined : handleDrop}
-        onClick={disabled ? undefined : () => fileInputRef.current?.click()}
-        role="button"
-        tabIndex={disabled ? -1 : 0}
-        aria-label="Escolher fotos da galeria"
         aria-disabled={disabled}
       >
-        <input
-          ref={fileInputRef}
-          type="file"
-          multiple
-          accept="image/*,video/*"
-          onChange={handleFileChange}
-          disabled={disabled}
-          className={styles.hiddenInput}
-        />
         <div className={styles.iconWrap} aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <rect x="3" y="3" width="18" height="18" rx="3" />
@@ -84,23 +100,13 @@ export function DropZone({ onFiles, disabled = false }: DropZoneProps) {
         </div>
         <div className={styles.title}>escolhe da galeria</div>
         <div className={styles.hint}>{disabled ? 'adiciona o teu nome primeiro' : 'fotos · vídeos'}</div>
-      </div>
+      </label>
 
-      <button
-        type="button"
-        className={styles.cameraBtn}
-        onClick={disabled ? undefined : () => cameraInputRef.current?.click()}
-        disabled={disabled}
+      <label
+        htmlFor={cameraId}
+        className={`${styles.cameraBtn} ${disabled ? styles.cameraBtnDisabled : ''}`}
+        aria-disabled={disabled}
       >
-        <input
-          ref={cameraInputRef}
-          type="file"
-          accept="image/*"
-          capture="environment"
-          onChange={handleFileChange}
-          disabled={disabled}
-          className={styles.hiddenInput}
-        />
         <svg
           width="18"
           height="18"
@@ -116,7 +122,7 @@ export function DropZone({ onFiles, disabled = false }: DropZoneProps) {
           <circle cx="12" cy="13" r="3" />
         </svg>
         tira uma foto agora
-      </button>
+      </label>
     </>
   );
 }

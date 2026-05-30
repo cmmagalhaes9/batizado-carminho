@@ -30,4 +30,6 @@
   font-weight: 400;
   color: var(--ink);
   line-height: 1;
+  justify-content: center;
+  align-items: center;
 }
