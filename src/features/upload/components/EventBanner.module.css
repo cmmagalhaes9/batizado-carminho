@@ -1,64 +1,73 @@
 .banner {
-  background: linear-gradient(135deg, var(--pink) 0%, var(--peach) 100%);
+  background: var(--paper);
   border-radius: var(--radius);
-  padding: 32px 24px 28px;
+  padding: 32px 28px 28px;
   margin-bottom: 22px;
   position: relative;
-  overflow: hidden;
   text-align: center;
+  border: 1.5px solid var(--line);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
 }
 
-.banner::before,
-.banner::after {
+/* Soft corner rose tints */
+.banner::before {
   content: '';
   position: absolute;
-  border-radius: 50%;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 20% 0%, rgba(196, 137, 156, 0.12) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 50% at 80% 100%, rgba(200, 213, 193, 0.15) 0%, transparent 70%);
   pointer-events: none;
 }
 
-.banner::before {
-  width: 120px;
-  height: 120px;
-  background: rgba(255, 255, 255, 0.3);
-  top: -40px;
-  right: -30px;
-}
-
-.banner::after {
-  width: 80px;
-  height: 80px;
-  background: rgba(247, 231, 184, 0.5);
-  bottom: -20px;
-  left: -20px;
-}
-
-.decor {
-  font-family: 'Caveat', cursive;
-  font-size: 22px;
-  color: var(--ink);
-  opacity: 0.6;
-  margin-bottom: 6px;
+.botanical {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
   position: relative;
   z-index: 1;
 }
 
-.decor::before {
-  content: '✿';
-  margin-right: 8px;
+.botanicalBottom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 12px;
+  position: relative;
+  z-index: 1;
+  transform: scaleY(-1);
 }
 
-.decor::after {
-  content: '✿';
-  margin-left: 8px;
+.decor {
+  font-family: 'Caveat', cursive;
+  font-size: 17px;
+  color: var(--muted);
+  margin-bottom: 6px;
+  position: relative;
+  z-index: 1;
+  letter-spacing: 0.5px;
 }
 
 .name {
-  font-family: 'Fraunces', serif;
-  font-style: italic;
+  font-family: 'Great Vibes', cursive;
   font-weight: 400;
-  font-size: 30px;
-  line-height: 1.15;
-  color: var(--ink);
+  font-size: clamp(38px, 10vw, 48px);
+  line-height: 1.1;
+  color: var(--pink-deep);
+  position: relative;
+  z-index: 1;
+}
+
+.date {
+  font-family: 'Fraunces', serif;
+  font-size: 13px;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--muted);
+  margin-top: 6px;
+  letter-spacing: 1.5px;
   position: relative;
   z-index: 1;
 }

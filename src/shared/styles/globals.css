@@ -1,24 +1,25 @@
 /* ===========================================
-   Global design system — soft, intimate, nursery-warm
+   Global design system — romantic, botanical, invitation-warm
    =========================================== */
 
 :root {
-  /* Palette */
+  /* Palette — inspired by the baptism card's dusty rose & sage */
   --cream: #fdf9f3;
-  --paper: #ffffff;
+  --paper: #fffdfb;
   --ink: #4a3a35;
   --ink-soft: #786258;
   --muted: #b0a097;
 
-  --pink: #f4d4cf;
-  --pink-deep: #d99a8e;
-  --peach: #f9e2cf;
+  --pink: #f2d0d8;
+  --pink-deep: #b87d90;
+  --peach: #f5e6d8;
+  --rose: #c4899c;          /* dusty mauve – card border tone */
   --sage: #c8d5c1;
   --sage-deep: #95a98a;
   --butter: #f7e7b8;
   --sky: #d8e3e8;
 
-  --line: #efe5d8;
+  --line: #eee0d8;
   --shadow-sm: 0 2px 12px rgba(74, 58, 53, 0.05);
   --shadow-md: 0 12px 36px rgba(74, 58, 53, 0.08);
   --shadow-lg: 0 24px 60px rgba(74, 58, 53, 0.12);
@@ -47,15 +48,15 @@ body {
   line-height: 1.5;
 }
 
-/* Ambient lighting — late afternoon through curtains */
+/* Soft rose & sage ambient light */
 body::before {
   content: '';
   position: fixed;
   inset: 0;
   background:
-    radial-gradient(ellipse 70% 50% at 90% 0%, rgba(244, 212, 207, 0.5) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 50% at 0% 30%, rgba(247, 231, 184, 0.35) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 40% at 50% 100%, rgba(200, 213, 193, 0.3) 0%, transparent 60%);
+    radial-gradient(ellipse 70% 50% at 90% 0%, rgba(196, 137, 156, 0.2) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 0% 30%, rgba(247, 231, 184, 0.25) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 50% 100%, rgba(200, 213, 193, 0.25) 0%, transparent 60%);
   pointer-events: none;
   z-index: 0;
 }
@@ -65,10 +66,10 @@ body::after {
   content: '';
   position: fixed;
   inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' /%3E%3CfeColorMatrix values='0 0 0 0 0.3 0 0 0 0 0.25 0 0 0 0 0.22 0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' /%3E%3CfeColorMatrix values='0 0 0 0 0.3 0 0 0 0 0.25 0 0 0 0 0.22 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   pointer-events: none;
   z-index: 0;
-  opacity: 0.5;
+  opacity: 0.4;
   mix-blend-mode: multiply;
 }
 
@@ -85,24 +86,12 @@ body::after {
 
 /* Typography utility classes */
 .display {
-  font-family: 'Fraunces', serif;
-  font-size: clamp(32px, 8.5vw, 40px);
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(38px, 10vw, 52px);
   font-weight: 400;
   line-height: 1.15;
-  letter-spacing: -0.5px;
-  color: var(--ink);
-  margin-bottom: 14px;
-}
-
-.display .script {
-  font-family: 'Caveat', cursive;
-  font-weight: 600;
-  font-size: 1.3em;
   color: var(--pink-deep);
-  letter-spacing: 0;
-  line-height: 0.8;
-  display: inline-block;
-  transform: rotate(-2deg);
+  margin-bottom: 14px;
 }
 
 .heading {
@@ -115,10 +104,10 @@ body::after {
 }
 
 .heading .accent {
-  font-family: 'Caveat', cursive;
-  font-size: 1.25em;
+  font-family: 'Great Vibes', cursive;
+  font-size: 1.4em;
   color: var(--pink-deep);
-  font-weight: 600;
+  font-weight: 400;
 }
 
 .lead {
@@ -129,12 +118,11 @@ body::after {
 
 .eyebrow {
   display: inline-block;
-  font-family: 'Caveat', cursive;
-  font-size: 18px;
+  font-family: 'Great Vibes', cursive;
+  font-size: 22px;
   color: var(--pink-deep);
-  font-weight: 600;
+  font-weight: 400;
   letter-spacing: 0.3px;
-  transform: rotate(-1deg);
 }
 
 .card {
@@ -143,7 +131,7 @@ body::after {
   padding: 28px 24px;
   box-shadow: var(--shadow-md);
   margin-bottom: 20px;
-  border: 1px solid rgba(239, 229, 216, 0.8);
+  border: 1px solid var(--line);
 }
 
 /* Inputs */
@@ -175,7 +163,7 @@ input[type='password'] {
 input:focus {
   border-color: var(--pink-deep);
   background: var(--paper);
-  box-shadow: 0 0 0 4px rgba(217, 154, 142, 0.12);
+  box-shadow: 0 0 0 4px rgba(184, 125, 144, 0.12);
 }
 
 input::placeholder {
@@ -206,9 +194,10 @@ input::placeholder {
 .app-footer {
   text-align: center;
   padding: 36px 0 40px;
-  font-family: 'Caveat', cursive;
-  font-size: 16px;
-  color: var(--muted);
+  font-family: 'Great Vibes', cursive;
+  font-size: 22px;
+  color: var(--pink-deep);
+  opacity: 0.8;
 }
 
 .app-footer a {

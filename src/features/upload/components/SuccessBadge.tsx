@@ -15,7 +15,7 @@ export function SuccessBadge({ count }: SuccessBadgeProps) {
       <h3>
         {count} {count === 1 ? 'lembrança enviada' : 'lembranças enviadas'}
       </h3>
-      <p>adiciona mais quando quiser — o link permanece aberto</p>
+      <p>adiciona mais quando quiseres</p>
     </div>
   );
 }

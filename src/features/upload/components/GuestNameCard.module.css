@@ -24,22 +24,23 @@
   justify-content: space-between;
   padding: 16px 20px;
   background: var(--paper);
-  border: 1.5px solid var(--sage);
+  border: 1.5px solid var(--line);
   border-radius: 20px;
   box-shadow: var(--shadow-sm);
   margin-bottom: 20px;
 }
 
 .greetedMsg {
-  font-family: 'Caveat', cursive;
-  font-size: 22px;
+  font-family: 'Great Vibes', cursive;
+  font-size: 26px;
   color: var(--ink-soft);
+  line-height: 1.2;
 }
 
 .greetedMsg strong {
-  font-family: 'Caveat', cursive;
-  color: var(--sage-deep);
-  font-weight: 700;
+  font-family: 'Great Vibes', cursive;
+  color: var(--pink-deep);
+  font-weight: 400;
 }
 
 .change {

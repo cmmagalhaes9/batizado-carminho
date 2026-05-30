@@ -1,28 +1,29 @@
 .dropZone {
-  border: 2px dashed var(--line);
-  border-radius: 22px;
-  padding: 38px 24px;
+  border: 1.5px dashed var(--rose);
+  border-radius: var(--radius);
+  padding: 36px 24px;
   text-align: center;
   cursor: pointer;
   transition: all 0.2s;
-  background: var(--cream);
+  background: rgba(242, 208, 216, 0.08);
   position: relative;
   margin-bottom: 12px;
 }
 
 .dropZone:hover {
   border-color: var(--pink-deep);
+  background: rgba(242, 208, 216, 0.15);
+}
+
+.over {
+  border-color: var(--pink-deep);
+  background: rgba(242, 208, 216, 0.2);
 }
 
 .dropZoneDisabled {
   opacity: 0.55;
   cursor: default;
   pointer-events: none;
-}
-
-.over {
-  border-color: var(--pink-deep);
-  background: var(--peach);
 }
 
 .hiddenInput {
@@ -34,33 +35,34 @@
 }
 
 .iconWrap {
-  width: 64px;
-  height: 64px;
+  width: 60px;
+  height: 60px;
   margin: 0 auto 14px;
   background: var(--pink);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
+  border: 1px solid rgba(184, 125, 144, 0.2);
 }
 
 .iconWrap svg {
-  width: 28px;
-  height: 28px;
-  color: var(--ink);
+  width: 26px;
+  height: 26px;
+  color: var(--pink-deep);
 }
 
 .title {
-  font-family: 'Fraunces', serif;
-  font-size: 18px;
-  font-weight: 500;
+  font-family: 'Great Vibes', cursive;
+  font-size: 24px;
+  font-weight: 400;
   margin-bottom: 4px;
   color: var(--ink);
 }
 
 .hint {
   font-family: 'Caveat', cursive;
-  font-size: 16px;
+  font-size: 15px;
   color: var(--muted);
 }
 

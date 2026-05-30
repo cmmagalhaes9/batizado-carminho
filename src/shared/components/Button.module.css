@@ -36,12 +36,12 @@
 .pink {
   background: var(--pink-deep);
   color: white;
-  box-shadow: 0 6px 20px rgba(217, 154, 142, 0.35);
+  box-shadow: 0 6px 20px rgba(184, 125, 144, 0.3);
 }
 .pink:hover {
-  background: #c98577;
+  background: #a46e82;
   transform: translateY(-1px);
-  box-shadow: 0 8px 24px rgba(217, 154, 142, 0.45);
+  box-shadow: 0 8px 24px rgba(184, 125, 144, 0.4);
 }
 
 .ghost {

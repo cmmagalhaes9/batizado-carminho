@@ -43,7 +43,7 @@ function NameForm({ onSave }: { onSave: (name: string) => void }) {
   return (
     <form className={`card ${styles.form}`} onSubmit={handleSubmit}>
       <h2 className="heading">
-        qual o teu nome? <span className="accent">✿</span>
+        qual o teu nome?
       </h2>
       <p className="lead" style={{ fontSize: 14, marginBottom: 14 }}>
         para a família saber de quem é cada foto
