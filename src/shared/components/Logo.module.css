@@ -7,21 +7,20 @@
 }
 
 .mark {
-  width: 34px;
-  height: 34px;
-  background: var(--pink);
+  width: 32px;
+  height: 32px;
+  background: var(--lavender);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  border: 1px solid rgba(184, 125, 144, 0.25);
 }
 
 .mark svg {
-  width: 17px;
-  height: 17px;
-  color: var(--pink-deep);
+  width: 16px;
+  height: 16px;
+  color: var(--lavender-deep);
 }
 
 .text {
@@ -30,6 +29,4 @@
   font-weight: 400;
   color: var(--ink);
   line-height: 1;
-  justify-content: center;
-  align-items: center;
 }

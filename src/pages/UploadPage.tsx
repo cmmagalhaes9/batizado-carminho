@@ -94,8 +94,8 @@ function UploadFlow({ eventId, eventName }: { eventId: string; eventName: string
           {hasPending && (
             <div className={styles.previewPanel}>
               <div className={styles.previewHeader}>
-                <span>{pendingFiles.length} ficheiro{pendingFiles.length === 1 ? '' : 's'} selecionado{pendingFiles.length === 1 ? '' : 's'}</span>
-                <button type="button" onClick={handleCancel} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--muted)', fontSize: 13 }}>
+                <span>{pendingFiles.length} {pendingFiles.length === 1 ? 'ficheiro selecionado' : 'ficheiros selecionados'}</span>
+                <button type="button" onClick={handleCancel} className={styles.previewCancel}>
                   cancelar
                 </button>
               </div>
@@ -111,11 +111,7 @@ function UploadFlow({ eventId, eventName }: { eventId: string; eventName: string
                   </div>
                 ))}
               </div>
-              <button
-                type="button"
-                onClick={handleConfirm}
-                style={{ marginTop: 16, width: '100%', padding: '14px 20px', background: 'var(--ink)', color: 'var(--cream)', border: 'none', borderRadius: 18, fontFamily: "'Nunito', sans-serif", fontSize: 15, fontWeight: 600, cursor: 'pointer' }}
-              >
+              <button type="button" onClick={handleConfirm} className={styles.previewConfirm}>
                 enviar ♡
               </button>
             </div>

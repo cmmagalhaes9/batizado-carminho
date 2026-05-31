@@ -1,6 +1,6 @@
 .btn {
   width: 100%;
-  padding: 16px 20px;
+  padding: 15px 20px;
   border: none;
   border-radius: 18px;
   font-family: 'Nunito', sans-serif;
@@ -16,7 +16,7 @@
 }
 
 .btn:disabled {
-  opacity: 0.5;
+  opacity: 0.45;
   cursor: not-allowed;
   transform: none !important;
 }
@@ -26,22 +26,19 @@
   color: var(--cream);
 }
 .primary:hover {
-  background: #3a2d29;
+  background: #4a3c38;
   transform: translateY(-1px);
-}
-.primary:active {
-  transform: translateY(0);
 }
 
 .pink {
   background: var(--pink-deep);
   color: white;
-  box-shadow: 0 6px 20px rgba(184, 125, 144, 0.3);
+  box-shadow: 0 4px 18px rgba(196, 160, 180, 0.3);
 }
 .pink:hover {
-  background: #a46e82;
+  background: #b090a4;
   transform: translateY(-1px);
-  box-shadow: 0 8px 24px rgba(184, 125, 144, 0.4);
+  box-shadow: 0 6px 22px rgba(196, 160, 180, 0.38);
 }
 
 .ghost {
@@ -59,5 +56,5 @@
   color: white;
 }
 .sage:hover {
-  filter: brightness(1.05);
+  filter: brightness(1.06);
 }

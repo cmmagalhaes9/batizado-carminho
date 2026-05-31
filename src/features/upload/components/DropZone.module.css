@@ -1,5 +1,3 @@
-/* Inputs live off-screen; labels reference them via htmlFor.
-   This avoids the iOS Safari double-trigger caused by the overlay pattern. */
 .offscreenInput {
   position: absolute;
   left: -9999px;
@@ -14,56 +12,55 @@
   display: block;
   border: 1.5px dashed var(--rose);
   border-radius: var(--radius);
-  padding: 36px 24px;
+  padding: 34px 24px;
   text-align: center;
   cursor: pointer;
-  transition: all 0.2s;
-  background: rgba(242, 208, 216, 0.08);
-  position: relative;
+  transition: all 0.25s;
+  background: rgba(245, 221, 228, 0.06);
   margin-bottom: 12px;
   -webkit-tap-highlight-color: transparent;
   user-select: none;
 }
 
-.dropZone:hover {
+.dropZone:hover,
+.dropZone:active {
   border-color: var(--pink-deep);
-  background: rgba(242, 208, 216, 0.15);
+  background: rgba(245, 221, 228, 0.14);
 }
 
 .over {
   border-color: var(--pink-deep);
-  background: rgba(242, 208, 216, 0.2);
+  background: rgba(245, 221, 228, 0.18);
 }
 
 .dropZoneDisabled {
-  opacity: 0.55;
+  opacity: 0.5;
   cursor: default;
   pointer-events: none;
 }
 
 .iconWrap {
-  width: 60px;
-  height: 60px;
+  width: 58px;
+  height: 58px;
   margin: 0 auto 14px;
-  background: var(--pink);
+  background: var(--lavender);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(184, 125, 144, 0.2);
 }
 
 .iconWrap svg {
-  width: 26px;
-  height: 26px;
-  color: var(--pink-deep);
+  width: 24px;
+  height: 24px;
+  color: var(--lavender-deep);
 }
 
 .title {
   font-family: 'Great Vibes', cursive;
   font-size: 24px;
   font-weight: 400;
-  margin-bottom: 4px;
+  margin-bottom: 3px;
   color: var(--ink);
 }
 
@@ -76,7 +73,7 @@
 .cameraBtn {
   display: flex;
   width: 100%;
-  padding: 16px 20px;
+  padding: 15px 20px;
   background: var(--ink);
   color: var(--cream);
   border: none;
@@ -94,13 +91,14 @@
   user-select: none;
 }
 
-.cameraBtn:hover {
-  background: #3a2d29;
+.cameraBtn:hover,
+.cameraBtn:active {
+  background: #4a3c38;
   transform: translateY(-1px);
 }
 
 .cameraBtnDisabled {
-  opacity: 0.5;
+  opacity: 0.45;
   cursor: default;
   pointer-events: none;
 }
